@@ -1,0 +1,35 @@
+#include <iostream>
+
+using namespace std;
+
+bool linear_search(int array[], int size, int target) {
+    for (int i = 0; i < size; i++) {
+        if (array[i] == target) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+int main() {
+    int multiplication_table[10][10];
+
+    for (int i = 1; i <= 10; i++) {
+        for (int j = 1; j <= 10; j++) {
+            multiplication_table[i - 1][j - 1] = i * j;
+        }
+    }
+
+    int target;
+    cout << "Enter a number to search for: ";
+    cin >> target;
+
+    if (linear_search(&multiplication_table[0][0], 10 * 10, target)) {
+        cout << "The number " << target << " is in the multiplication table." << endl;
+    } else {
+        cout << "The number " << target << " is not in the multiplication table." << endl;
+    }
+
+    return 0;
+}
