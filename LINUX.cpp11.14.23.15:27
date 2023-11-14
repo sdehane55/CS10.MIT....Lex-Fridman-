@@ -1,0 +1,10 @@
+Create LINUX.C+11.13.23.15:37
+To create a hello world program in C++ that will run in Linux, you can use the following code:
+
+C++
+#include <iostream>
+
+int main() {
+  std::cout << "Hello, World!" << std::endl;
+  return 0;
+}
