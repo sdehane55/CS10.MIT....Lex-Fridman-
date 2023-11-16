@@ -1,0 +1,39 @@
+//Receives input array along with left and right indexes 
+    //Returns the index of the search key if it is found 
+    //otherwise it returns -1 
+    int IterativeBinarySearch(int A[], int key, int l, int r)  
+    { 
+  int count = 0;
+
+        //As long as left index is less than right index 
+        while (l <= r)  
+        { 
+           count++;
+            //Middle element 
+            int m = (l + r) / 2;  
+
+            //If the search key on the left half 
+            if (key < A[m]) 
+            { 
+                //Update right index 
+                r = m - 1; 
+            } 
+            //If the search key on the right half 
+            else if (key > A[m]) 
+            { 
+                //Update the left index 
+                l = m + 1; 
+            } 
+            //We found the key 
+            else 
+            {  
+
+                return count; 
+            } 
+        }  
+
+        //Key was not found  
+
+        return -1; 
+    }  
+
