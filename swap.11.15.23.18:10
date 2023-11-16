@@ -1,0 +1,15 @@
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+int main() {
+
+  string myData = "ABCDEFGH";
+ 
+  char temp = myData[2];
+  myData[2] = myData[5];
+  myData[5] = temp;
+  cout << myData << endl; 
+}
+/*ABFDECGH*/
