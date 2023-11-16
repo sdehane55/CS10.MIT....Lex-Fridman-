@@ -1,0 +1,59 @@
+#include <iostream>
+#include <random>
+
+using namespace std;
+
+int sequentialSearch(int B[], int searchkey, int start, int stop) {
+  int comparisons = 0;
+
+  for (int i = start; i <= stop; ++i) {
+    comparisons++;
+    if (B[i] == searchkey) {
+      return comparisons;
+    }
+  }
+
+  return -1; // Not found
+}
+
+int IterativeBinarySearch(int A[], int key, int l, int r) {
+  int comparisons = 0;
+
+  while (l <= r) {
+    comparisons++;
+    int m = (l + r) / 2;
+
+    if (key < A[m]) {
+      r = m - 1;
+    } else if (key > A[m]) {
+      l = m + 1;
+    } else {
+      return comparisons; // Found
+    }
+  }
+
+  return -1; // Not found
+}
+
+int main() {
+  // Input array (already sorted)
+  int A[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+  // Input array (not sorted)
+  int a1[] = {21, 2, 5, 3, 8, 13, 1};
+
+  // Search for 8 in sorted set
+  cout << "Comparisons for Binary Search: " << IterativeBinarySearch(A, 8, 0, 9) << endl;
+  cout << "Comparisons for Sequential Search: " << sequentialSearch(A, 8, 0, 9) << endl;
+
+  // Search for 8 in unsorted set
+  cout << "Comparisons for Binary Search: " << IterativeBinarySearch(a1, 8, 0, 9) << endl;
+  cout << "Comparisons for Sequential Search: " << sequentialSearch(a1, 8, 0, 9) << endl;
+
+  system("pause");
+  return 0;
+}
+/*Comparisons for Binary Search: 2
+Comparisons for Sequential Search: 8
+Comparisons for Binary Search: 1
+Comparisons for Sequential Search: 5*/
