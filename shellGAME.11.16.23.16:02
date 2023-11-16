@@ -1,0 +1,85 @@
+#include <iostream>
+#include <random>
+
+using namespace std;
+
+int main() {
+  // Initialize random number generator
+  random_device rd;
+  mt19937 gen(rd());
+  uniform_int_distribution<> dis(1, 3);
+
+  // Set up the game
+  int shells[3] = {0, 1, 0};
+  int targetShell = 0; // Shell containing the hidden pea
+  int guesses = 0;
+
+  // Display the initial game state
+  cout << "Welcome to the Shell Game!" << endl;
+  cout << "There are three shells, one of which contains a pea." << endl;
+  cout << "Try to guess which shell the pea is under." << endl;
+
+  // Start the game loop
+  while (guesses < 3) {
+    // Display the current shell positions
+    cout << "Shell positions: " << endl;
+    for (int i = 0; i < 3; i++) {
+      cout << "Shell " << i + 1 << ": ";
+      if (shells[i] == 1) {
+        cout << "Pea";
+      } else {
+        cout << "Empty";
+      }
+      cout << endl;
+    }
+
+    // Get the user's guess
+    int guess;
+    cout << "Choose a shell (1, 2, or 3): ";
+    cin >> guess;
+
+    // Validate the user's input
+    if (guess < 1 || guess > 3) {
+      cout << "Invalid guess. Please enter a number between 1 and 3." << endl;
+      continue;
+    }
+
+    // Check if the user guessed correctly
+    if (guess == targetShell + 1) {
+      cout << "Congratulations! You found the pea!" << endl;
+      break;
+    } else {
+      // Shift the pea to a different shell
+      int newTargetShell = dis(gen) % 3;
+      shells[targetShell] = 0;
+      shells[newTargetShell] = 1;
+      targetShell = newTargetShell;
+
+      guesses++;
+      cout << "Sorry, the pea is not under that shell. Try again." << endl;
+    }
+  }
+
+  if (guesses == 3) {
+    cout << "You ran out of guesses. The pea was under shell " << targetShell + 1 << "." << endl;
+  }
+
+  return 0;
+}
+/*Welcome to the Shell Game!
+There are three shells, one of which contains a pea.
+Try to guess which shell the pea is under.
+Shell positions: 
+Shell 1: Empty
+Shell 2: Pea
+Shell 3: Empty
+Choose a shell (1, 2, or 3): 2
+Sorry, the pea is not under that shell. Try again.
+Shell positions: 
+Shell 1: Empty
+Shell 2: Pea
+Shell 3: Pea
+Choose a shell (1, 2, or 3): 3
+Congratulations! You found the pea!
+ 
+Normal program termination. Exit status: 0*/
